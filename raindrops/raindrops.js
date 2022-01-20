@@ -3,6 +3,11 @@
 // convenience to get you started writing code faster.
 //
 
-export const convert = () => {
-  throw new Error('Remove this statement and implement this function');
+export const convert = (number) => {
+	let string = '';
+	if (number % 3 === 0) string += 'Pling';
+	if (number % 5 === 0) string += 'Plang';
+	if (number % 7 === 0) string += 'Plong';
+
+	return string.length > 0 ? string : JSON.stringify(number);
 };

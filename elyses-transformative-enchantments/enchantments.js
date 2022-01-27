@@ -20,14 +20,23 @@ export function seeingDouble(deck) {
  */
 export function threeOfEachThree(deck) {
 	let newDeck = [];
-	deck.map((card) => {
-		if (card === 3) {
-			for (let n = 0; n < 2; n++) {
-				newDeck.push(card);
-			}
+	// deck.map((card) => {
+	// 	if (card === 3) {
+	// 		for (let n = 0; n < 2; n++) {
+	// 			newDeck.push(card);
+	// 		}
+	// 	}
+	// 	newDeck.push(card);
+	// });
+	// return newDeck;
+	deck.reduce((acc, value) => {
+		if (value === 3) {
+			acc.push(value);
+			acc.push(value);
 		}
-		newDeck.push(card);
-	});
+		acc.push(value);
+		return acc;
+	}, newDeck);
 	return newDeck;
 }
 
@@ -52,8 +61,11 @@ export function middleTwo(deck) {
  */
 
 export function sandwichTrick(deck) {
-	const first = deck.splice(0);
-	const last = deck.splice(-1);
+	const first = deck.splice(0, 1);
+	const last = deck.splice(-1, 1);
+	const halfSize = Math.floor(deck.length / 2);
+	const firstHalf = deck.splice(0, halfSize);
+	return [ ...firstHalf, ...last, ...first, ...deck ];
 }
 
 /**

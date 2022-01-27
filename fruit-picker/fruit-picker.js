@@ -16,7 +16,18 @@ import { checkStatus, checkInventory } from './grocer';
  * @return {boolean}
  */
 export function isServiceOnline() {
-  throw new Error('Implement the isServiceOnline function');
+	if (
+		checkStatus((status) => {
+			if (status.toLocaleLowerCase() === 'online') {
+				return true;
+			}
+			return false;
+		})
+	) {
+		return true;
+	}
+	return false;
+	// Could probably use ternary operator?
 }
 
 /**
@@ -28,7 +39,7 @@ export function isServiceOnline() {
  * @return {AvailabilityAction} the result from checkInventory
  */
 export function pickFruit(variety, quantity, callback) {
-  throw new Error('Implement the pickFruit function');
+	return checkInventory({ variety, quantity }, callback);
 }
 
 /**
@@ -39,7 +50,14 @@ export function pickFruit(variety, quantity, callback) {
  * @return {AvailabilityAction} whether the fruit was purchased 'PURCHASE' or 'NOOP'
  */
 export function purchaseInventoryIfAvailable(err, isAvailable) {
-  throw new Error('Implement the purchaseInventoryIfAvailable function');
+	if (err) {
+		throw new Error(err);
+	}
+	if (isAvailable) {
+		return 'PURCHASE';
+	} else {
+		return 'NOOP';
+	}
 }
 
 /**
@@ -50,5 +68,5 @@ export function purchaseInventoryIfAvailable(err, isAvailable) {
  * @return {AvailabilityAction} whether the fruit was purchased 'PURCHASE' or 'NOOP'
  */
 export function pickAndPurchaseFruit(variety, quantity) {
-  throw new Error('Implement the pickAndPurchaseFruit function');
+	return pickFruit(variety, quantity, purchaseInventoryIfAvailable);
 }

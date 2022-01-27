@@ -3,6 +3,15 @@
 // convenience to get you started writing code faster.
 //
 
-export const countWords = () => {
-  throw new Error('Remove this statement and implement this function');
+export const countWords = (sentence) => {
+	const counterObj = {};
+	const splitSentence = sentence.split(' ');
+	for (let word of splitSentence) {
+		if (!counterObj[word]) {
+			counterObj[word] = 1;
+		} else {
+			counterObj[word] += 1;
+		}
+	}
+	return counterObj;
 };

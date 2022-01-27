@@ -68,8 +68,7 @@ export function memoizeTransform(f) {
 	return (x, y) => {
 		let x1, y1;
 		if (inputs[0] === x && inputs[1] === y) {
-			[ x1, y1 ] = result;
-			return [ x1, y1 ];
+			return result;
 		} else {
 			result = f(x, y);
 			inputs = [ x, y ];

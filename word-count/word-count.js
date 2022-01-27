@@ -5,8 +5,14 @@
 
 export const countWords = (sentence) => {
 	const counterObj = {};
-	const splitSentence = sentence.split(' ');
+	const splitSentence = sentence.split(/[\W+]/g); // What's the differens between () and [] in regex?
 	for (let word of splitSentence) {
+		if (word === '') {
+			continue;
+		}
+
+		word = word.toLowerCase();
+
 		if (!counterObj[word]) {
 			counterObj[word] = 1;
 		} else {

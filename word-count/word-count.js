@@ -6,6 +6,7 @@
 export const countWords = (sentence) => {
 	const counterObj = {};
 	const splitSentence = sentence.toLowerCase().split(/[\W+]/g); // What's the differens between () and [] in regex?
+	// How to check for apostrophes (')?
 	for (let word of splitSentence) {
 		if (word === '') {
 			continue;

@@ -94,7 +94,8 @@ export function twoIsSpecial(deck) {
  * @returns {number[]} ordered deck
  */
 export function perfectlyOrdered(deck) {
-	throw new Error('Implement the perfectlyOrdered function');
+	// Found on MDN, this sorts the array in ascending order
+	return deck.sort((value, nextValue) => value - nextValue);
 }
 
 /**
@@ -105,5 +106,5 @@ export function perfectlyOrdered(deck) {
  * @returns {number[]} reordered deck
  */
 export function reorder(deck) {
-	throw new Error('Implement the reorder function');
+	return deck.reverse();
 }

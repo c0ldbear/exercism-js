@@ -60,11 +60,10 @@ export function deleteTrack(playlist, track) {
  * @returns {string[]} list of artists
  */
 export function listArtists(playlist) {
-	const playlistSet = new Set(playlist);
 	const artistsSet = new Set();
 	const songArtistDivider = ' - ';
 	let artist = undefined;
-	for (let song of playlistSet) {
+	for (let song of playlist) {
 		artist = song.split(songArtistDivider)[1];
 		// or:
 		// artist = song.split('-')[1].trim();

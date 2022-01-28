@@ -11,7 +11,8 @@
  * @returns {string[]} new playlist with unique entries
  */
 export function removeDuplicates(playlist) {
-  throw new Error('Please implement the removeDuplicates function');
+	const playlistSet = new Set(playlist);
+	return Array.from(playlistSet);
 }
 
 /**
@@ -22,7 +23,8 @@ export function removeDuplicates(playlist) {
  * @returns {boolean} whether the track is in the playlist
  */
 export function hasTrack(playlist, track) {
-  throw new Error('Please implement the hasTrack function');
+	const playlistSet = new Set(playlist);
+	return playlistSet.has(track);
 }
 
 /**
@@ -33,7 +35,9 @@ export function hasTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function addTrack(playlist, track) {
-  throw new Error('Please implement the addTrack function');
+	const playlistSet = new Set(playlist);
+	playlistSet.add(track);
+	return Array.from(playlistSet);
 }
 
 /**
@@ -44,7 +48,9 @@ export function addTrack(playlist, track) {
  * @returns {string[]} new playlist
  */
 export function deleteTrack(playlist, track) {
-  throw new Error('Please implement the deleteTrack function');
+	const playlistSet = new Set(playlist);
+	playlistSet.delete(track);
+	return Array.from(playlistSet);
 }
 
 /**
@@ -54,5 +60,15 @@ export function deleteTrack(playlist, track) {
  * @returns {string[]} list of artists
  */
 export function listArtists(playlist) {
-  throw new Error('Please implement the listArtists function');
+	const playlistSet = new Set(playlist);
+	const artistsSet = new Set();
+	const songArtistDivider = ' - ';
+	let artist = undefined;
+	for (let song of playlistSet) {
+		artist = song.split(songArtistDivider)[1];
+		// or:
+		// artist = song.split('-')[1].trim();
+		artistsSet.add(artist);
+	}
+	return Array.from(artistsSet);
 }

@@ -4,11 +4,16 @@
 //
 
 export const decodedValue = (colors) => {
-	let valueArr = colors.map((color) => {
-		return COLORS.indexOf(color);
-	});
-	let valueStr = String(valueArr.slice(0, 2)).replace(',', '');
-	return parseInt(valueStr);
+	const [ first, second ] = colors;
+	return getResistorColorValue(first, second);
 };
+
+function getColorsValue(colorString) {
+	return COLORS.indexOf(colorString);
+}
+
+function getResistorColorValue(first, second) {
+	return getColorsValue(first) * 10 + getColorsValue(second);
+}
 
 const COLORS = [ 'black', 'brown', 'red', 'orange', 'yellow', 'green', 'blue', 'violet', 'grey', 'white' ];

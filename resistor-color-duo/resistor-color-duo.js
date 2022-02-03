@@ -4,12 +4,10 @@
 //
 
 export const decodedValue = (colors) => {
-	let valueStr = '';
-	let color = '';
-	for (let n = 0; n < 2; n++) {
-		color = colors[n];
-		valueStr += String(COLORS.indexOf(colors[n]));
-	}
+	let valueArr = colors.map((color) => {
+		return COLORS.indexOf(color);
+	});
+	let valueStr = String(valueArr.slice(0, 2)).replace(',', '');
 	return parseInt(valueStr);
 };
 

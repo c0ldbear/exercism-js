@@ -4,16 +4,12 @@
 //
 
 export const isLeap = (year) => {
-	let leap = false;
-	if (year % 4 === 0) {
-		leap = true;
-
-		if (year % 100 === 0) {
-			leap = false;
-		}
-
-		if (year % 400 === 0) {
+	let leap = year % 4 === 0 ? true : false;
+	if (leap) {
+		if (year % 100 !== 0 || year % 400 === 0) {
 			leap = true;
+		} else {
+			leap = false;
 		}
 	}
 	return leap;

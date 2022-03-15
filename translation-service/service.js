@@ -9,15 +9,15 @@
 // In your own projects, files, and code, you can play with @ts-check as well.
 
 export class TranslationService {
-  /**
+	/**
    * Creates a new service
    * @param {ExternalApi} api the original api
    */
-  constructor(api) {
-    this.api = api;
-  }
+	constructor(api) {
+		this.api = api;
+	}
 
-  /**
+	/**
    * Attempts to retrieve the translation for the given text.
    *
    * - Returns whichever translation can be retrieved, regardless the quality
@@ -26,11 +26,11 @@ export class TranslationService {
    * @param {string} text
    * @returns {Promise<string>}
    */
-  free(text) {
-    throw new Error('Implement the free function');
-  }
+	free(text) {
+		return this.api.fetch(text).then((response) => response.translation);
+	}
 
-  /**
+	/**
    * Batch translates the given texts using the free service.
    *
    * - Resolves all the translations (in the same order), if they all succeed
@@ -40,11 +40,12 @@ export class TranslationService {
    * @param {string[]} texts
    * @returns {Promise<string[]>}
    */
-  batch(texts) {
-    throw new Error('Implement the batch function');
-  }
+	batch(texts) {
+		if (texts.length === 0) return Promise.reject(new BatchIsEmpty());
+		return Promise.all(texts.map((text) => this.free(text)));
+	}
 
-  /**
+	/**
    * Requests the service for some text to be translated.
    *
    * Note: the request service is flaky, and it may take up to three times for
@@ -53,11 +54,11 @@ export class TranslationService {
    * @param {string} text
    * @returns {Promise<void>}
    */
-  request(text) {
-    throw new Error('Implement the request function');
-  }
+	request(text) {
+		throw new Error('Implement the request function');
+	}
 
-  /**
+	/**
    * Retrieves the translation for the given text
    *
    * - Rejects with an error if the quality can not be met
@@ -67,9 +68,9 @@ export class TranslationService {
    * @param {number} minimumQuality
    * @returns {Promise<string>}
    */
-  premium(text, minimumQuality) {
-    throw new Error('Implement the premium function');
-  }
+	premium(text, minimumQuality) {
+		throw new Error('Implement the premium function');
+	}
 }
 
 /**
@@ -77,18 +78,18 @@ export class TranslationService {
  * not meet a certain threshold. Do not change the name of this error.
  */
 export class QualityThresholdNotMet extends Error {
-  /**
+	/**
    * @param {string} text
    */
-  constructor(text) {
-    super(
-      `
+	constructor(text) {
+		super(
+			`
 The translation of ${text} does not meet the requested quality threshold.
     `.trim()
-    );
+		);
 
-    this.text = text;
-  }
+		this.text = text;
+	}
 }
 
 /**
@@ -96,11 +97,11 @@ The translation of ${text} does not meet the requested quality threshold.
  * texts to translate (it was empty). Do not change the name of this error.
  */
 export class BatchIsEmpty extends Error {
-  constructor() {
-    super(
-      `
+	constructor() {
+		super(
+			`
 Requested a batch translation, but there are no texts in the batch.
     `.trim()
-    );
-  }
+		);
+	}
 }
